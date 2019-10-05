@@ -35,7 +35,7 @@ class Server:
     def receiveS(self, GC, R1, R2):      #Receive a Garbled Circuit from server
         self.GC = GC
         self.R1 = R1
-        self.R2
+        self.R2 = R2
 
     def garble(self):                   #Garbling F to GC(1)
         self.GC = Garbled_Circuit(self.Circuit, self.R1, self.R2)
