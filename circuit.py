@@ -109,19 +109,20 @@ class circuit:
 
 
 # TESTING
-def AND(a, b):
-    return a&b
+if __name__ == "__main__":
+    def AND(a, b):
+        return a&b
 
-circ = circuit(AND, 0)
-circ.YaoGarbledCkt(1, 2, 3)
-a0, a1, b0, b1 = circ.YaoGarbledCkt_in(1)
-z0, z1 = circ.YaoGarbledCkt_out(2)
+    circ = circuit(AND, 0)
+    circ.YaoGarbledCkt(1, 2, 3)
+    a0, a1, b0, b1 = circ.YaoGarbledCkt_in(1)
+    z0, z1 = circ.YaoGarbledCkt_out(2)
 
-z = circ.eval(a1, b1)
+    z = circ.eval(a1, b1)
 
-if z == z0:
-    print(0)
-elif z == z1:
-    print(1)
-else:
-    print("I was tricked:(")
+    if z == z0:
+        print(0)
+    elif z == z1:
+        print(1)
+    else:
+        print("I was tricked:(")

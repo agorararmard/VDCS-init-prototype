@@ -1,5 +1,5 @@
-import circuit
-import message
+from circuit import circuit
+from message import message
 class Server:
     IDs = 0                             #for keeping track of object ids, alt: use id() func
 
@@ -12,27 +12,24 @@ class Server:
         return self.ID
 
     def receiveC(self, m):#, R2):       #Receive a boolean expression from user
-        F,cid,self.R1 = m[self.ID].extract()
-        self.Circuit = circuit(F,cid)       #F is the single bit function, cid is the computation ID
-        
+        self.Circuit, self.R,  x, y = m[self.ID].extract()
+
     def receiveS(self,m, GC):#, R2):      #Receive a Garbled Circuit from server
         self.GC = GC
-        F,cid,self.R1 = m[self.ID].extract()
-        self.Circuit = circuit(F,cid)       #F is the single bit function, cid is the computation ID
+        self.Circuit, self.R,  self.winx, self.winy = m[self.ID].extract()
         #self.R2 = R2
 
     def garble(self):                   #Garbling F to GC(1)
-        self.GC = self.Circuit
-        self.GC.YaoGarbledCkt(self.R1[0], self.R1[1], self.R1[2])
-        return self.GC
+        #self.GC = self.Circuit
+        self.Circuit.YaoGarbledCkt(self.R[0], self.R[1], self.R[2])
+        return self.Circuit
 
-    def eval(self,inWire):              #Evaluating GC(i) on inWire
-        return self.GC.eval(inWire), self.GC.getOutWires()
+    def eval(self):              #Evaluating GC(i) on inWire
+        return self.GC.eval(self.winx, self.winy)
 
     def reRand(self):                   #reRanding GC(i-1) to GC(i)// for now it's doing the same as garble.
-        self.GC = self.Circuit
-        self.GC.YaoGarbledCkt(self.R1[0], self.R1[1], self.R1[2])
-        return self.GC
+        self.Circuit.reRand(self.R)
+        return self.Circuit
 
     def getGC(self):                    #returning GC(i)
         return self.GC

@@ -1,9 +1,12 @@
+import circuit
+
 class message:
 
-    def __init__(self,F,cid,R):
-        self.F = F
-        self.cid = cid
+    def __init__(self,circ,R, winx=0, winy=0):
+        self.circ = circ
         self.R = R
+        self.winx = winx
+        self.winy = winy
     
     def extract(self):
-        return self.F,self.cid,self.R
+        return self.circ,self.R,self.winx, self.winy
