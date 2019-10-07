@@ -1,7 +1,3 @@
-from Crypto import Random
-from Crypto.PublicKey import RSA
-import base64
-import numpy as np
 import random
 from circuit import circuit
 from message import message
@@ -11,8 +7,6 @@ class Client:
     def __init__(self,size):
         self.SeedSize = size
 
-        #self.R2 = randint(pow(10, self.SeedSize - 1) + 1, pow(10, self.SeedSize) - 1)
-    
     
     def intiate_Process(self,F, win, servers):
     #this function will send the (public_Key, R1, R2, Function) to the servers
@@ -37,17 +31,6 @@ class Client:
         m[servers-1] = message(circ, self.R[servers-2], winx, winy)
 
         return m
-
-
-
-    #this function to be called after recieving the results
-    #def Decode_Verify(output = []):
-    #    result = np.array([])
-    #    if np.array_equal(output, outputWires):     #check for the labels first if they are equal
-    #        for text in output:
-    #            result.append(self.decryptt(text))
-    #    return result        
-    
 
     def result(self, z):
         if z == self.outwires[0]:

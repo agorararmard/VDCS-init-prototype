@@ -28,8 +28,7 @@ def dec(key, msg):
     plaintext = cipher.decrypt(ciphertext)
     md5hash = plaintext[:16]
     data = plaintext[16:]
-#    print(md5hash)
-#    print(data)
+
     if md5hash != MD5.new(data).digest():
         return False
     else:
